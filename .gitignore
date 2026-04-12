@@ -1,0 +1,9 @@
+# Generated PDF output
+TuniRoute_Cahier_des_Charges.pdf
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/
