@@ -1,0 +1,5 @@
+# TuniRoute – Python dependencies
+
+matplotlib>=3.7
+reportlab>=4.0
+Pillow>=9.0
