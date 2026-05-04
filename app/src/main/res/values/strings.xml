@@ -20,6 +20,6 @@
     <string name="label_transfer">Transfer</string>
     <string name="label_direct">Direct</string>
     <string name="format_minutes">%d min</string>
-    <string name="format_hours_minutes">%d h %d min</string>
+    <string name="format_hours_minutes">%1$d h %2$d min</string>
     <string name="format_transfers">%d transfer(s)</string>
 </resources>
