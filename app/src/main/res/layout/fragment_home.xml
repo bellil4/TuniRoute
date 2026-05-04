@@ -104,7 +104,7 @@
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="⇅ Swap"
+                        android:text="@string/btn_swap"
                         android:textSize="12sp" />
                 </LinearLayout>
 
