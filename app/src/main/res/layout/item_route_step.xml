@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginBottom="8dp"
+    android:gravity="center_vertical">
+
+    <!-- Colored line type bar -->
+    <View
+        android:id="@+id/view_type_color"
+        android:layout_width="4dp"
+        android:layout_height="match_parent"
+        android:minHeight="64dp"
+        android:layout_marginEnd="12dp" />
+
+    <!-- Transport icon -->
+    <ImageView
+        android:id="@+id/iv_transport_icon"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="10dp" />
+
+    <!-- Step details -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_step_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="2dp">
+
+            <TextView
+                android:id="@+id/tv_step_from"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" → "
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary" />
+
+            <TextView
+                android:id="@+id/tv_step_to"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Step time -->
+    <TextView
+        android:id="@+id/tv_step_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textColor="@color/primary"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp" />
+
+</LinearLayout>
