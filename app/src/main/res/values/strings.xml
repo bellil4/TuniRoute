@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TuniRoute</string>
+    <string name="home_subtitle">Tunis Public Transport Navigator</string>
+
+    <!-- Home screen -->
+    <string name="label_from">FROM</string>
+    <string name="label_to">TO</string>
+    <string name="hint_source">Enter starting stop…</string>
+    <string name="hint_destination">Enter destination stop…</string>
+    <string name="btn_search">Find Route</string>
+    <string name="btn_swap">⇅ Swap</string>
+
+    <!-- Results screen -->
+    <string name="title_results">Routes</string>
+    <string name="no_routes_found">No route found between these stops.\nPlease check the stop names and try again.</string>
+    <string name="loading">Searching for routes…</string>
+
+    <!-- Route step labels -->
+    <string name="label_transfer">Transfer</string>
+    <string name="label_direct">Direct</string>
+    <string name="format_minutes">%d min</string>
+    <string name="format_hours_minutes">%1$d h %2$d min</string>
+    <string name="format_transfers">%d transfer(s)</string>
+</resources>
