@@ -121,7 +121,7 @@ public class TransportMapView extends View {
         Collections.sort(orderedLines, Comparator.comparingInt(line -> line.id));
 
         Map<Integer, List<NodePosition>> occurrences = new HashMap<>();
-        int lineCount = Math.max(1, orderedLines.size());
+        int lineDenominator = orderedLines.size() > 1 ? orderedLines.size() - 1 : 1;
 
         for (int lineIndex = 0; lineIndex < orderedLines.size(); lineIndex++) {
             TransportLine line = orderedLines.get(lineIndex);
@@ -134,7 +134,7 @@ public class TransportMapView extends View {
             int stopCount = Math.max(1, sequence.size() - 1);
             for (int i = 0; i < sequence.size(); i++) {
                 float x = 0.1f + (0.8f * i / stopCount);
-                float y = 0.15f + (0.7f * lineIndex / Math.max(1, lineCount - 1));
+                float y = 0.15f + (0.7f * lineIndex / lineDenominator);
                 NodePosition position = new NodePosition(x, y);
                 occurrences.computeIfAbsent(sequence.get(i).stopId, key -> new ArrayList<>()).add(position);
             }

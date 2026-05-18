@@ -15,13 +15,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.tuniroute.R;
 import com.tuniroute.algorithm.RouteResult;
+import com.tuniroute.data.model.LineStop;
+import com.tuniroute.data.model.Stop;
+import com.tuniroute.data.model.TransportLine;
 import com.tuniroute.databinding.FragmentResultsBinding;
+
+import java.util.List;
 
 public class ResultsFragment extends Fragment {
 
     private FragmentResultsBinding binding;
     private ResultsViewModel viewModel;
     private RouteResultAdapter adapter;
+    private List<Stop> latestStops;
+    private List<TransportLine> latestLines;
+    private List<LineStop> latestLineStops;
 
     @Nullable
     @Override
@@ -61,24 +69,18 @@ public class ResultsFragment extends Fragment {
             binding.transportMapView.setHighlightedRoute(empty ? null : routes.get(0));
         });
 
-        viewModel.getStops().observe(getViewLifecycleOwner(), stops ->
-                binding.transportMapView.setGraphData(
-                        stops,
-                        viewModel.getLines().getValue(),
-                        viewModel.getLineStops().getValue()
-                ));
-        viewModel.getLines().observe(getViewLifecycleOwner(), lines ->
-                binding.transportMapView.setGraphData(
-                        viewModel.getStops().getValue(),
-                        lines,
-                        viewModel.getLineStops().getValue()
-                ));
-        viewModel.getLineStops().observe(getViewLifecycleOwner(), lineStops ->
-                binding.transportMapView.setGraphData(
-                        viewModel.getStops().getValue(),
-                        viewModel.getLines().getValue(),
-                        lineStops
-                ));
+        viewModel.getStops().observe(getViewLifecycleOwner(), stops -> {
+            latestStops = stops;
+            updateMapGraphIfReady();
+        });
+        viewModel.getLines().observe(getViewLifecycleOwner(), lines -> {
+            latestLines = lines;
+            updateMapGraphIfReady();
+        });
+        viewModel.getLineStops().observe(getViewLifecycleOwner(), lineStops -> {
+            latestLineStops = lineStops;
+            updateMapGraphIfReady();
+        });
 
         // Observe loading state
         viewModel.isLoading().observe(getViewLifecycleOwner(), loading -> {
@@ -106,6 +108,13 @@ public class ResultsFragment extends Fragment {
 
     private void onRouteClicked(RouteResult route) {
         binding.transportMapView.setHighlightedRoute(route);
+    }
+
+    private void updateMapGraphIfReady() {
+        if (latestStops == null || latestLines == null || latestLineStops == null) {
+            return;
+        }
+        binding.transportMapView.setGraphData(latestStops, latestLines, latestLineStops);
     }
 
     @Override

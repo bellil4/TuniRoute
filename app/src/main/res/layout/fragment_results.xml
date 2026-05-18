@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-         android:layout_marginTop="48dp" />
+        android:layout_marginTop="48dp" />
 
     <com.tuniroute.ui.map.TransportMapView
         android:id="@+id/transport_map_view"

@@ -83,7 +83,7 @@ public class ResultsViewModel extends AndroidViewModel {
                 List<Stop> allStops      = repository.getAllStopsSync();
                 List<TransportLine> lines = repository.getAllLinesSync();
                 List<LineStop> lineStops  = repository.getAllLineStopsSync();
-                stops.postValue(allStops);
+                this.stops.postValue(allStops);
                 this.lines.postValue(lines);
                 this.lineStops.postValue(lineStops);
 
