@@ -23,6 +23,9 @@ public class ResultsViewModel extends AndroidViewModel {
     private final MutableLiveData<List<RouteResult>> routes = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>(false);
     private final MutableLiveData<String> errorMessage = new MutableLiveData<>();
+    private final MutableLiveData<List<Stop>> stops = new MutableLiveData<>();
+    private final MutableLiveData<List<TransportLine>> lines = new MutableLiveData<>();
+    private final MutableLiveData<List<LineStop>> lineStops = new MutableLiveData<>();
 
     public ResultsViewModel(@NonNull Application application) {
         super(application);
@@ -39,6 +42,18 @@ public class ResultsViewModel extends AndroidViewModel {
 
     public LiveData<String> getErrorMessage() {
         return errorMessage;
+    }
+
+    public LiveData<List<Stop>> getStops() {
+        return stops;
+    }
+
+    public LiveData<List<TransportLine>> getLines() {
+        return lines;
+    }
+
+    public LiveData<List<LineStop>> getLineStops() {
+        return lineStops;
     }
 
     /**
@@ -68,6 +83,9 @@ public class ResultsViewModel extends AndroidViewModel {
                 List<Stop> allStops      = repository.getAllStopsSync();
                 List<TransportLine> lines = repository.getAllLinesSync();
                 List<LineStop> lineStops  = repository.getAllLineStopsSync();
+                stops.postValue(allStops);
+                this.lines.postValue(lines);
+                this.lineStops.postValue(lineStops);
 
                 RouteFinder finder = new RouteFinder();
                 finder.buildGraph(allStops, lines, lineStops);
