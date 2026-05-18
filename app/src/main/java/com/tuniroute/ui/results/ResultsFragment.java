@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,6 +49,8 @@ public class ResultsFragment extends Fragment {
         adapter = new RouteResultAdapter(this::onRouteClicked);
         binding.rvRoutes.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvRoutes.setAdapter(adapter);
+        binding.transportMapView.setOnStopTapListener(stop ->
+                Toast.makeText(requireContext(), stop.name, Toast.LENGTH_SHORT).show());
 
         // Observe routes
         viewModel.getRoutes().observe(getViewLifecycleOwner(), routes -> {
@@ -55,7 +58,27 @@ public class ResultsFragment extends Fragment {
             boolean empty = routes == null || routes.isEmpty();
             binding.tvNoRoutes.setVisibility(empty ? View.VISIBLE : View.GONE);
             binding.rvRoutes.setVisibility(empty ? View.GONE : View.VISIBLE);
+            binding.transportMapView.setHighlightedRoute(empty ? null : routes.get(0));
         });
+
+        viewModel.getStops().observe(getViewLifecycleOwner(), stops ->
+                binding.transportMapView.setGraphData(
+                        stops,
+                        viewModel.getLines().getValue(),
+                        viewModel.getLineStops().getValue()
+                ));
+        viewModel.getLines().observe(getViewLifecycleOwner(), lines ->
+                binding.transportMapView.setGraphData(
+                        viewModel.getStops().getValue(),
+                        lines,
+                        viewModel.getLineStops().getValue()
+                ));
+        viewModel.getLineStops().observe(getViewLifecycleOwner(), lineStops ->
+                binding.transportMapView.setGraphData(
+                        viewModel.getStops().getValue(),
+                        viewModel.getLines().getValue(),
+                        lineStops
+                ));
 
         // Observe loading state
         viewModel.isLoading().observe(getViewLifecycleOwner(), loading -> {
@@ -82,7 +105,7 @@ public class ResultsFragment extends Fragment {
     }
 
     private void onRouteClicked(RouteResult route) {
-        // Route is already fully displayed inline; no separate detail screen needed
+        binding.transportMapView.setHighlightedRoute(route);
     }
 
     @Override
